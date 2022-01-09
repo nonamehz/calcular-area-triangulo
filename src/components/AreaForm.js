@@ -2,23 +2,27 @@ import React, { useState } from 'react';
 
 export const AreaForm = () => {
 
-    const [base, setBase] = useState(0);
-    const [altura, setAltura] = useState(0);
-    const [resultado, setResultado] = useState(0);
+    const [formState, setFormState] = useState({
+        altura: 0,
+        base: 0,
+        area: 0
+    });
 
-    const handleBaseChange = (e) => {
-        setBase(e.target.value);
-    }
+    const { altura, base, area } = formState;
 
-    const handleAlturaChange = (e) => {
-        setAltura(e.target.value);
+    const handleInputChange = ({ target }) => {
+        setFormState({
+            ...formState,
+            [target.name]: target.value
+        });
     }
 
     const handleArea = (e) => {
         e.preventDefault();
-        setResultado((base * altura) / 2);
-        setBase(0);
-        setAltura(0);
+        setFormState({
+            ...formState,
+            area: (parseInt(base) * parseInt(altura)) / 2
+        })
     }
 
     return (
@@ -30,16 +34,18 @@ export const AreaForm = () => {
                 <label htmlFor="base">Base: (m)</label>
                 <input
                     id='base'
+                    name='base'
                     type="number"
-                    onChange={handleBaseChange}
+                    onChange={handleInputChange}
                     value={base}
                 />
 
                 <label className='mt' htmlFor="altura">Altura: (m)</label>
                 <input
                     id='altura'
+                    name='altura'
                     type="number"
-                    onChange={handleAlturaChange}
+                    onChange={handleInputChange}
                     value={altura}
                 />
 
@@ -51,11 +57,16 @@ export const AreaForm = () => {
                     Calcular Área
                 </button>
 
+                <label className='mt' htmlFor="altura">Área: (m<sup>2</sup>)</label>
+                <input
+                    id='area'
+                    name='area'
+                    type="number"
+                    onChange={handleInputChange}
+                    value={area}
+                    disabled
+                />
             </form>
-
-            <div className="resultado text-center">
-                <p>{resultado} mt<sup>2</sup></p>
-            </div>
         </div>
     )
 }
