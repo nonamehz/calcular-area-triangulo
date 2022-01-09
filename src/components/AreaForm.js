@@ -17,6 +17,8 @@ export const AreaForm = () => {
     const handleArea = (e) => {
         e.preventDefault();
         setResultado((base * altura) / 2);
+        setBase(0);
+        setAltura(0);
     }
 
     return (
