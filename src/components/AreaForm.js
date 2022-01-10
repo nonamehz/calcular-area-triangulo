@@ -21,7 +21,7 @@ export const AreaForm = () => {
         e.preventDefault();
         setFormState({
             ...formState,
-            area: (parseInt(base) * parseInt(altura)) / 2
+            area: Number((Number(base) * Number(altura)) / 2).toFixed(2)
         })
     }
 
